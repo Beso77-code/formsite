@@ -1,119 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center; 
-            align-items: center;  
-            height: 100vh;         
-            margin: 0;
-            background-color: #f5f5f5;
-        }
-        img{
-             border: 1px solid black;
-            width: 400px;
-            padding: 20px;
-            border-radius: 9px;
-            height: 400px;
-            margin-right: 10px;
-        }
-        .container {
-            border: 1px solid black;
-            width: 400px;
-            padding: 20px;
-            border-radius: 9px;
-            height: 400px;
-            text-align: center; /* توسيط النص والعناصر بداخل div */
-            background-color: white;
-        }
-        .inner-box {
-            border: 1px solid black;
-            width: 200px;
-            padding: 5px;
-            border-radius: 9px;
-            margin: 0 auto; /* لتوسيط العنصر داخل الحاوية */
-        }
-        select {
-            display: block;
-            margin: 15px auto;
-            width: 150px;
-            text-align: center;
-        }
-        .time-box {
-            border: 1px solid black;
-            width: 200px;
-            padding: 5px;
-            border-radius: 9px;
-            height: 20px;
-            margin: 15px auto 0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .main-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    img {
+      border: 1px solid black;
+      width: 400px;
+      padding: 20px;
+      border-radius: 9px;
+      height: 400px;
+    }
+
+    .container {
+      border: 1px solid black;
+      width: 400px;
+      padding: 20px;
+      border-radius: 9px;
+      height: 400px;
+      text-align: center;
+      background-color: white;
+    }
+
+    .inner-box {
+      border: 1px solid black;
+      width: 200px;
+      padding: 5px;
+      border-radius: 9px;
+      margin: 0 auto;
+    }
+
+    select {
+      display: block;
+      margin: 15px auto;
+      width: 150px;
+      text-align: center;
+    }
+
+    .time-box {
+      border: 1px solid black;
+      width: 200px;
+      padding: 5px;
+      border-radius: 9px;
+      height: 20px;
+      margin: 15px auto 0;
+    }
+
+    /* ✅ Responsive media query for screens less than 768px (mobile) */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      img,
+      .container {
+        width: 90%;
+        height: auto;
+      }
+    }
+  </style>
 </head>
 <body>
-    <img src="IMG_0569.PNG" alt="">
+
+  <div class="main-container">
+    <img src="IMG_0569.PNG" alt="صورة الجدول" />
+    
     <div class="container">
-        <h1> king fadan  👑 </h1>
-        <div class="inner-box">حدد الصف -> مكان -> الميعاد</div>
-        <div>
-            <select>
-                <option>-- الصف الدراسي --</option>
-                <option id="s1" value="s1">الاول الثانوي</option>
-                <option id="s2" value="s2">الثاني الثانوي</option>
-                <option id="s3" value="s3">الثالث الثانوي</option>
-            </select>
-            <select>
-                <option>-- اختار المكان --</option>
-                <option id="c1" value="c1">ابوجندي</option>
-                <option id="c2" value="c2">قطور</option>
-                <option id="c3" value="c3">المحله</option>
-                <option id="c4" value="c4">كتامه</option>
-            </select>
-            <div class="time-box" id="result"></div>
-        </div>
+      <h1>king fadan 👑</h1>
+      <div class="inner-box">حدد الصف -> مكان -> الميعاد</div>
+      <div>
+        <select>
+          <option>-- الصف الدراسي --</option>
+          <option id="s1" value="s1">الاول الثانوي</option>
+          <option id="s2" value="s2">الثاني الثانوي</option>
+          <option id="s3" value="s3">الثالث الثانوي</option>
+        </select>
+        <select>
+          <option>-- اختار المكان --</option>
+          <option id="c1" value="c1">ابوجندي</option>
+          <option id="c2" value="c2">قطور</option>
+          <option id="c3" value="c3">المحله</option>
+          <option id="c4" value="c4">كتامه</option>
+        </select>
+        <div class="time-box" id="result"></div>
+      </div>
     </div>
-    <script>
-         const data = {
-            
-    "s1": {
-        "c2": "الأحد والأربعاء الساعة 10 صباحًا",
-        "c3": "الاثنين والخميس الساعة 10:30 صباحًا",
-        "c4": "السبت والثلاثاء الساعة 12 ظهرًا",
-        "c1": "الاثنين الساعة 4 مساءً، الخميس الساعة 3 مساءً"
-    },
-     "s2": {
-        "c2": "الأحد والأربعاء الساعة 2 مساءً",
-        "c3": "الاثنين والخميس الساعة 2 مساءً",
-        "c4": "السبت والثلاثاء الساعة 2 مساءً",
-        "c1": "الأحد والأربعاء الساعة 5 مساءً"
-    },
-     "s3": {
-        "c2": "الأحد والأربعاء الساعة 3 مساءً",
-        "c3": "الاثنين والخميس الساعة 1 مساءً",
-        "c4": "السبت والثلاثاء الساعة 3 مساءً",
-        "c1": "السبت والثلاثاء الساعة 4:30 مساءً"
-    }
-  };
-  const classSelect = document.querySelectorAll("select")[0];
+  </div>
+
+  <script>
+    const data = {
+      s1: {
+        c2: "الأحد والأربعاء الساعة 10 صباحًا",
+        c3: "الاثنين والخميس الساعة 10:30 صباحًا",
+        c4: "السبت والثلاثاء الساعة 12 ظهرًا",
+        c1: "الاثنين الساعة 4 مساءً، الخميس الساعة 3 مساءً"
+      },
+      s2: {
+        c2: "الأحد والأربعاء الساعة 2 مساءً",
+        c3: "الاثنين والخميس الساعة 2 مساءً",
+        c4: "السبت والثلاثاء الساعة 2 مساءً",
+        c1: "الأحد والأربعاء الساعة 5 مساءً"
+      },
+      s3: {
+        c2: "الأحد والأربعاء الساعة 3 مساءً",
+        c3: "الاثنين والخميس الساعة 1 مساءً",
+        c4: "السبت والثلاثاء الساعة 3 مساءً",
+        c1: "السبت والثلاثاء الساعة 4:30 مساءً"
+      }
+    };
+
+    const classSelect = document.querySelectorAll("select")[0];
     const placeSelect = document.querySelectorAll("select")[1];
     const resultDiv = document.getElementById("result");
 
     function updateResult() {
-        const classValue = classSelect.value;
-        const placeValue = placeSelect.value;
+      const classValue = classSelect.value;
+      const placeValue = placeSelect.value;
 
-        if (data[classValue] && data[classValue][placeValue]) {
-            resultDiv.textContent = data[classValue][placeValue];
-        } else {
-            resultDiv.textContent = ""; // أو "لا توجد بيانات" مثلاً
-        }
+      if (data[classValue] && data[classValue][placeValue]) {
+        resultDiv.textContent = data[classValue][placeValue];
+      } else {
+        resultDiv.textContent = "";
+      }
     }
 
     classSelect.addEventListener("change", updateResult);
     placeSelect.addEventListener("change", updateResult);
-    </script>
+  </script>
 </body>
 </html>
